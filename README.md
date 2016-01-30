@@ -1,7 +1,8 @@
 NXT-ROS
 =======
 
-A software stack containing tools for using LEGO Mindstorms NXT with ROS Fuerte. The interface is implemented using NXT-Python v1.1.2.
+A software stack containing tools for using LEGO Mindstorms NXT with ROS Fuerte.  
+The interface is implemented using NXT-Python v1.1.2.
 
 Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
 Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
