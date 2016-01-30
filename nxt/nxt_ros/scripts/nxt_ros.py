@@ -385,7 +385,7 @@ def main():
         else:
             rospy.logerr('Invalid sensor/actuator type %s'%c['type'])
 
-    callback_handle_frequency = 10.0
+    callback_handle_frequency = 100.0
     last_callback_handle = rospy.Time.now()
     while not rospy.is_shutdown():
         my_lock.acquire()
