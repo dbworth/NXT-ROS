@@ -1,12 +1,8 @@
 NXT-ROS
 =======
 
-A software stack containing tools to interface LEGO Mindstorms with ROS.
+A software stack containing tools to interface LEGO Mindstorms with ROS Fuerte.
 
-**ROS Electric**  
-Originally developed in 2011, it is no longer maintained.  
-Documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
-Code: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
+Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
+Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
 
-**ROS Fuerte**  
-Forked from http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
