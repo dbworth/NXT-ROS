@@ -113,6 +113,10 @@ class Motor(Device):
         self.motor = nxt.motor.Motor(comm, eval(params['port']))
         self.cmd = 0 #default command
 
+        # Reset the motor encoder to zero, so the
+        # rotation count will be relative to zero
+        self.motor.reset_position(False)
+
         # create publisher
         self.pub = rospy.Publisher('joint_state', JointState)
         self.last_js = None
