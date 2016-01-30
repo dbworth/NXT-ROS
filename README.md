@@ -6,58 +6,64 @@ A software stack containing tools to interface LEGO Mindstorms with ROS Fuerte.
 Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
 Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
 
+.
 
+###Package status
 
+####nxt stack:  
 
-Package status:
-
-nxt:
-
-nxt_controllers  
+**nxt_controllers**  
 Compiles ok, the base_controller has been tested.
 
-nxt_description  
+**nxt_description**  
 Working.
 
-nxt_lxf2urdf  
+**nxt_lxf2urdf**  
 Compiles ok, un-tested.
 
-nxt_msgs  
+**nxt_msgs**  
 Working.
 
-nxt_python  
+**nxt_python**  
 Working.
 
-nxt_ros  
-Working.
-This version adds the ability to read the position of a motor as the absolute angle from 0 to 2*pi radians. Alternatively the motor position is measured as the total +/- rotation in either direction, relative to the starting position.
+**nxt_ros**  
+Working.  
+There is a new option to read the position of a motor as the absolute angle from 0 to 2*pi radians. By default the motor position is measured as the total +/- rotation in either direction, relative to the starting position.
 
-
-
-nxt_rviz_plugin
+**nxt_rviz_plugin**  
 Disabled, it is not compatible with the ROS Fuerte release of RViz which was ported to Qt.
 
+####nxt_robots stack:  
 
-nxt_robots  
-
-nxt_robot_gyro_car  
+**nxt_robot_gyro_car**  
 Working. The robot model can be viewed in Rviz.  
 
-nxt_robot_kit_test
+**nxt_robot_kit_test**  
 Working. This is a test package, so the robot looks like a pile of disconnected LEGO parts when viewed in Rviz.  
 
-nxt_robot_sensor_car  
+**nxt_robot_sensor_car**  
 Working. The robot model can be viewed in Rviz.  
 
+####nxt_apps stack:  
 
-nxt_apps
-
-nxt_assisted_teleop  
+**nxt_assisted_teleop**  
 Compiles ok, un-tested.
 
-nxt_teleop
+**nxt_teleop**  
 Working.  
 
+.
+
+###Documentation  
+Installation instructions are in this README file.  
+
+The original documentation has more detailed information:  
+[wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
+[wiki.ros.org/nxt_robots](http://wiki.ros.org/nxt_robots)  
+[wiki.ros.org/nxt_apps](http://wiki.ros.org/nxt_apps)  
+
+.
 
 ###Installation
 
@@ -113,7 +119,10 @@ Restart udev:
 Log-out or restart your computer.
 
 
-###Test the installation:
+###Test the installation:  
+
+**nxt** stack:  
+
 Connect a touch sensor to port 1.
 > $ roscore
 > $ rosrun nxt_python touch_sensor_test.py  
@@ -137,3 +146,39 @@ The 'effort' value can be in the range 0.0 to 1.25, with +/- to specify the dire
 
 To stop the motor, set the effort to 0.0:  
 > $ rostopic pub /joint_command nxt_msgs/JointCommand '{name: 'motor_joint', effort: 0.0}' --once  
+
+**nxt_robots** stack:  
+
+Connect motors to Port A and Port B of the NXT Brick.  
+Connect the NXT to your computer.  
+
+> $ roscore
+
+In a new terminal:  
+> $ roslaunch nxt_robot_gyro_car robot.launch  
+Ignore the error messages, this is because we haven't connected the required motors and sensors.  
+
+In a new terminal:  
+> $ rosrun rviz rviz  
+In Rviz you'll need to add a RobotModel display so you can visualize the robot.
+
+**nxt_apps** stack:  
+
+In a new terminal:  
+> $ roslaunch nxt_teleop teleop_keyboard.launch  
+Use the arrow keys to control the motors.  
+
+You can also use a joystick.  
+Configure the joystick using the instructions here:  
+http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick
+
+> $ roslaunch nxt_teleop teleop_joy.launch 
+
+With the Microsoft XBox 360 joystick, you need to hold down the top-left button. The left joystick controls turning, the right joystick goes forward.  
+
+=============
+
+
+
+
+
