@@ -1,0 +1,13 @@
+<package>
+  <description brief="nxt_ros_test">
+A sample configuration and launch file to test the nxt_ros package.
+  </description>
+  <author>David Butterworth</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org</url>
+  <depend package="rospy"/>
+  <depend package="nxt_ros"/>
+</package>
+
+

@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="nxt_ros" type="nxt_ros.py" name="nxt_ros" output="screen" respawn="true">
+    <rosparam command="load" file="$(find nxt_ros_test)/config/nxt_robot.yaml" />
+  </node>
+
+  <node pkg="nxt_ros" type="joint_states_aggregator.py" name="joint_state_publisher" output="screen" />
+
+</launch>
