@@ -29,7 +29,7 @@
 
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
-#include <joy/Joy.h>
+#include <sensor_msgs/Joy.h>
 #include "boost/thread/mutex.hpp"
 #include "boost/thread/thread.hpp"
 #include "ros/console.h"
@@ -40,7 +40,7 @@ public:
   NxtTeleop();
 
 private:
-  void joyCallback(const joy::Joy::ConstPtr& joy);
+  void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
   void publish();
 
   ros::NodeHandle ph_, nh_;
@@ -74,12 +74,12 @@ NxtTeleop::NxtTeleop():
   ph_.param("scale_linear", l_scale_, l_scale_);
 
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
-  joy_sub_ = nh_.subscribe<joy::Joy>("joy", 10, &NxtTeleop::joyCallback, this);
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &NxtTeleop::joyCallback, this);
 
   timer_ = nh_.createTimer(ros::Duration(0.1), boost::bind(&NxtTeleop::publish, this));
 }
 
-void NxtTeleop::joyCallback(const joy::Joy::ConstPtr& joy)
+void NxtTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist vel;
   vel.angular.z = a_scale_*joy->axes[angular_];

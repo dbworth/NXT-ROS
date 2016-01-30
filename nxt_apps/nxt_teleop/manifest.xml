@@ -10,8 +10,8 @@
   <url>http://ros.org/wiki/nxt_teleop</url>
   <depend package="nxt_ros"/>
   <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
   <depend package="joy"/>
 
 </package>
-
 
