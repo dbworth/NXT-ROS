@@ -11,6 +11,8 @@ Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)
 
 ###Package status
 
+All packages use `rosbuild`.
+
 **nxt** stack:  
 
  - **nxt_controllers**  
