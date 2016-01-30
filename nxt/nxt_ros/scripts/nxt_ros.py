@@ -119,7 +119,7 @@ class Motor(Device):
         # False = The position ranges from -32,768 to +32,767
         #         degrees, relative to the starting position.
         #         After this the 16-bit signed integer will overflow.
-        self.use_absolute_position = True
+        self.use_absolute_position = False
         # Number of degrees per revolution (integer),
         # this can be tuned for better acuracy
         self.counts_per_rev = 358
