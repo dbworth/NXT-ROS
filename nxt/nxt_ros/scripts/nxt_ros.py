@@ -113,6 +113,17 @@ class Motor(Device):
         self.motor = nxt.motor.Motor(comm, eval(params['port']))
         self.cmd = 0 #default command
 
+        # Use absolute position
+        # True  = Return the position as an absolute value between
+        #         0 to 360 degrees (converted to radians).
+        # False = The position ranges from -32,768 to +32,767
+        #         degrees, relative to the starting position.
+        #         After this the 16-bit signed integer will overflow.
+        self.use_absolute_position = True
+        # Number of degrees per revolution (integer),
+        # this can be tuned for better acuracy
+        self.counts_per_rev = 358
+
         # Reset the motor encoder to zero, so the
         # rotation count will be relative to zero
         self.motor.reset_position(False)
@@ -140,7 +151,18 @@ class Motor(Device):
         js.header.stamp = rospy.Time.now()
         state = self.motor.get_output_state()
         js.name.append(self.name)
-        js.position.append(state[9] * math.pi / 180.0)
+
+        rotation_count = state[9]
+        position_in_radians = rotation_count * math.pi / 180.0
+
+        if self.use_absolute_position:
+            # Check if we have gone backwards
+            # past the starting position
+            if position_in_radians < 0.0:
+                position_in_radians = 2.0*math.pi + position_in_radians
+
+        js.position.append(position_in_radians)
+        js.position.append(rotation_count * math.pi / 180.0)
         js.effort.append(state[1] * POWER_TO_NM)
         vel = 0
         if self.last_js:
@@ -151,6 +173,13 @@ class Motor(Device):
             js.velocity.append(vel)
         self.pub.publish(js)
         self.last_js = js
+
+        if self.use_absolute_position:
+            # If motor has done a full rotation,
+            # reset the encoder to zero
+            if (rotation_count >= self.counts_per_rev) \
+            or (rotation_count <= -1.0*self.counts_per_rev):
+                self.motor.reset_position(False)
 
         # send command
         self.motor.run(int(self.cmd), 0)
