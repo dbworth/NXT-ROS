@@ -1,8 +1,12 @@
 NXT-ROS
 =======
 
-A software stack containing tools for using LEGO Mindstorms NXT with ROS Fuerte.  
-The interface is implemented using NXT-Python v1.1.2.
+A software stack containing tools for using LEGO Mindstorms NXT with ROS. 
+
+This branch depends on:  
+ - ROS Fuerte
+ - Python 2.6+
+ - NXT-Python v1.2.0
 
 Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
 Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
@@ -91,7 +95,7 @@ You might like to add these commands to your `~/.bashrc` file.
 
 **Install dependencies:**  
 
-NXT-Python v1.1.2 is automatically installed when the `nxt_python` package is first compiled.
+NXT-Python v1.2.0 is automatically installed in the `/src` directory of the `nxt_python` package when we run `rosmake`.
 
 You can install the other dependencies using the Ubuntu Package Manager or ROSdep: 
 > $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation  
@@ -175,7 +179,7 @@ Ignore the error messages, this is because we haven't connected the required mot
 In a new terminal:  
 > $ rosrun rviz rviz  
 
-In Rviz you'll need to add a RobotModel display so you can visualize the robot.
+In Rviz you'll need to set the Fixed Frame to '/base_link' and add a RobotModel display so you can visualize the robot.
 
 **nxt_apps** stack:  
 
