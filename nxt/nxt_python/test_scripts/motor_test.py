@@ -37,6 +37,7 @@ def test_motor(b):
     print '\n'
     motor.run(0) # stop motor
 
+
 b = nxt.locator.find_one_brick()
 
 test_motor(b)
