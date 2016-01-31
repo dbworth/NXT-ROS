@@ -70,7 +70,8 @@ The original documentation has more detailed information:
 
 ###Installation
 
-Upgrade the firmware on your NXT brick. The minimum required version is 1.28, but 1.31 is the latest as of Jan 2016.
+Upgrade the firmware on your NXT brick.  
+The minimum required version is 1.28, but 1.31 is the latest as of Jan 2016.
 
 Clone the Fuerte branch of this repository:  
 > $ cd ~/  
@@ -88,11 +89,11 @@ You might like to add these commands to your `~/.bashrc` file.
 > $ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/ros_workspace/nxt_robots  
 > $ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/ros_workspace/nxt_apps  
 
-Install dependencies:  
+**Install dependencies:**  
 
 NXT-Python v1.1.2 is automatically installed when the `nxt_python` package is first compiled.
 
-You can install the other dependencies using the Ubuntu Package Manager or ROSdep:  
+You can install the other dependencies using the Ubuntu Package Manager or ROSdep: 
 > $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation  
 > $ sudo aptitude install libusb-dev python-usb python-bluez  
 
@@ -107,7 +108,7 @@ Compile the stacks of packages:
 > $ rosmake nxt_robots  
 > $ rosmake nxt_apps  
 
-###Set the USB permissions:
+**Set the USB permissions:** 
 
 Add a new group:
 > $ sudo groupadd lego
