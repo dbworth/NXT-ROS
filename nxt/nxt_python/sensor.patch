@@ -1,0 +1,30 @@
+--- src/nxt/sensor.py	2010-08-17 05:00:12.000000000 +1000
++++ sensor-new.py	2016-01-31 13:17:53.073356779 +1000
+@@ -12,7 +12,7 @@
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ 
+-from time import sleep, time
++from time import sleep
+ from nxt.error import I2CError, I2CPendingError
+ 
+ PORT_1 = 0x00
+@@ -127,14 +127,14 @@
+ 
+ 	def i2c_query(self, address, n_bytes):
+ 		msg = chr(DigitalSensor.I2C_DEV) + chr(address)
+-		if not self.lastpoll: self.lastpoll = time()
+-		if self.lastpoll+0.02 > time():
+-			diff = time() - self.lastpoll
++		if not self.lastpoll: self.lastpoll = time.time()
++		if self.lastpoll+0.02 > time.time():
++			diff = time.time() - self.lastpoll
+ 			sleep(0.02 - diff)
+ 		self.brick.ls_write(self.port, msg, n_bytes)
+ 		self._ls_get_status(n_bytes)
+ 		data = self.brick.ls_read(self.port)
+-		self.lastpoll = time()
++		self.lastpoll = time.time()
+ 		if len(data) < n_bytes:
+ 			raise I2CError, 'Read failure'
+ 		return data[-n_bytes:]

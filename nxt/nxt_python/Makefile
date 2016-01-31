@@ -14,6 +14,7 @@ nxt-python: $(INSTALL_DIR)/installed
 $(INSTALL_DIR)/installed: $(SOURCE_DIR)/unpacked
 	rm -rf src
 	cd $(SOURCE_DIR) && python setup.py install --prefix=$(INSTALL_DIR) --install-purelib=$(INSTALL_DIR)/src
+	patch -p0 src/nxt/sensor.py sensor.patch 
 	touch $(INSTALL_DIR)/installed
 
 clean:
