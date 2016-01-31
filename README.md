@@ -116,10 +116,10 @@ Add a new group:
 Add yourself to that group:
 > $ sudo usermod -a -G lego USERNAME
 
-Create a udev rules file for the lego group that you just created.
+For Ubuntu versions before 12.0, create a udev rules file for the lego group that you just created:  
 > $ echo "BUS==\"usb\", ATTRS{idVendor}==\"0694\", GROUP=\"lego\", MODE=\"0660\"" > /tmp/70-lego.rules && sudo mv /tmp/70-lego.rules /etc/udev/rules.d/70-lego.rules
 
-On ubuntu 12.04 use
+For Ubuntu 12.04 use:  
 > $ echo "SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0694\", GROUP=\"lego\", MODE=\"0660\"" > /tmp/70-lego.rules && sudo mv /tmp/70-lego.rules /etc/udev/rules.d/70-lego.rules
 
 Restart udev:
