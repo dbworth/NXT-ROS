@@ -3,10 +3,7 @@ NXT-ROS
 
 A software stack containing tools for using LEGO Mindstorms NXT with ROS. 
 
-This branch depends on:  
- - ROS Fuerte
- - Python 2.6+
- - NXT-Python v1.2.0
+This branch depends on:<br> 	&#8226; ROS Fuerte<br> &#8226; Python 2.6+<br> &#8226; NXT-Python v1.2.0
 
 Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
 Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
