@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Test the LEGO Mindstorms NXT 2.0 RGB color sensor
+
 import roslib; roslib.load_manifest("nxt_python")
 import rospy
 import time

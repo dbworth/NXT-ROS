@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Test the LEGO Mindstorms NXT touch sensor
+
 import roslib; roslib.load_manifest("nxt_python")
 import rospy
 import time
