@@ -92,14 +92,15 @@ Install dependencies:
 
 NXT-Python v1.1.2 is automatically installed when the `nxt_python` package is first compiled.
 
-You can install the other dependencies using ROSdep or the Ubuntu Package Manager:  
+You can install the other dependencies using the Ubuntu Package Manager or ROSdep:  
+> $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation  
+> $ sudo aptitude install libusb-dev python-usb python-bluez  
+
+or 
+
 > $ sudo rosdep install -y nxt  
 > $ sudo rosdep install -y nxt_robots  
 > $ sudo rosdep install -y nxt_apps  
-
-or   
-
-> $ sudo aptitude install libusb-dev python-usb python-bluez  
 
 Compile the stacks of packages:  
 > $ rosmake nxt  
