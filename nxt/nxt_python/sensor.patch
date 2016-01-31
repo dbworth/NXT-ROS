@@ -1,14 +1,23 @@
 --- src/nxt/sensor.py	2010-08-17 05:00:12.000000000 +1000
-+++ sensor-new.py	2016-01-31 13:17:53.073356779 +1000
++++ sensor-new.py	2016-01-31 13:51:31.096753855 +1000
 @@ -12,7 +12,7 @@
  # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  # GNU General Public License for more details.
  
 -from time import sleep, time
-+from time import sleep
++import time
  from nxt.error import I2CError, I2CPendingError
  
  PORT_1 = 0x00
+@@ -118,7 +118,7 @@
+ 				if b >= n_bytes:
+ 					return b
+ 			except I2CPendingError:
+-				sleep(0.01)
++				time.sleep(0.01)
+ 		raise I2CError, 'ls_get_status timeout'
+ 
+ 	def i2c_command(self, address, value):
 @@ -127,14 +127,14 @@
  
  	def i2c_query(self, address, n_bytes):
@@ -16,10 +25,11 @@
 -		if not self.lastpoll: self.lastpoll = time()
 -		if self.lastpoll+0.02 > time():
 -			diff = time() - self.lastpoll
+-			sleep(0.02 - diff)
 +		if not self.lastpoll: self.lastpoll = time.time()
 +		if self.lastpoll+0.02 > time.time():
 +			diff = time.time() - self.lastpoll
- 			sleep(0.02 - diff)
++			time.sleep(0.02 - diff)
  		self.brick.ls_write(self.port, msg, n_bytes)
  		self._ls_get_status(n_bytes)
  		data = self.brick.ls_read(self.port)
@@ -28,3 +38,21 @@
  		if len(data) < n_bytes:
  			raise I2CError, 'Read failure'
  		return data[-n_bytes:]
+@@ -317,7 +317,7 @@
+ 		self.sensor_type = Type.LOW_SPEED_9V
+ 		self.mode = Mode.RAW
+ 		self.set_input_mode()
+-		sleep(0.1)  # Give I2C time to initialize
++		time.sleep(0.1)  # Give I2C time to initialize
+ 
+ 	def get_sample(self):
+ 		'Function to get data from ultrasonic sensors, synonmous to self.get_sample()'
+@@ -334,7 +334,7 @@
+ 		self.sensor_type = Type.LOW_SPEED_9V
+ 		self.mode = Mode.RAW
+ 		self.set_input_mode()
+-		sleep(0.1)  # Give I2C time to initialize
++		time.sleep(0.1)  # Give I2C time to initialize
+ 
+ 	def get_sample(self):
+ 		self.set_command_state(CommandState.SINGLE_SHOT)
