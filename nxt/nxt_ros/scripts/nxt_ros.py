@@ -190,7 +190,7 @@ class TouchSensor(Device):
     def __init__(self, params, comm):
         Device.__init__(self, params)
         # create touch sensor
-        self.touch = nxt.sensor.TouchSensor(comm, eval(params['port']))
+        self.touch = nxt.sensor.Touch(comm, eval(params['port']))
         self.frame_id = params['frame_id']
 
         # create publisher
