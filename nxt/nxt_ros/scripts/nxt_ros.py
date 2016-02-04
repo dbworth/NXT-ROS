@@ -357,23 +357,29 @@ class ColorSensor(Device):
 
 
 class IntensitySensor(Device):
+    """
+    This uses the NXT 2.0 RGB color sensor to
+    measure the intensity of reflected light,
+    with the option to enable the red, green,
+    or blue LEDs individually.
+    """
     def __init__(self, params, comm):
         Device.__init__(self, params)
         # create intensity sensor
-        self.intensity = nxt.sensor.ColorSensor(comm, eval(params['port']))
+        self.intensity = nxt.sensor.Color20(comm, eval(params['port']))
         self.frame_id = params['frame_id']
         self.color_r = params['color_r']
         self.color_g = params['color_g']
         self.color_b = params['color_b']
 
         if self.color_r == 1.0 and self.color_g == 0.0 and self.color_b == 0.0:
-            self.color = 'red'
+            self.color = Type.COLORRED
         elif self.color_r == 0.0 and self.color_g == 1.0 and self.color_b == 0.0:
-            self.color = 'green'
+            self.color = Type.COLORGREEN
         elif self.color_r == 0.0 and self.color_g == 0.0 and self.color_b == 1.0:
-            self.color = 'blue'
+            self.color = Type.COLORBLUE
         elif self.color_r == 0.0 and self.color_g == 0.0 and self.color_b == 0.0:
-            self.color = 'off'
+            self.color = Type.COLORNONE
         else:
             rospy.logerr('Invalid RGB values specifies for intensity color sensor')
 
@@ -387,6 +393,8 @@ class IntensitySensor(Device):
         co.r = self.color_r
         co.g = self.color_g
         co.b = self.color_b
+        # Get the reflected light reading.
+        # This turns on the LED if color = red/green/blue
         co.intensity = self.intensity.get_reflected_light(self.color)
         self.pub.publish(co)
 
@@ -407,6 +415,10 @@ def main():
                 # If there's a color sensor, turn off the LED light
                 cs = nxt.sensor.Color20(b, eval(c['port']))
                 cs.set_light_color(Type.COLORNONE)
+            elif c['type'] == 'intensity':
+                # If there's an intensity sensor, turn off the LED light
+                s = nxt.sensor.Color20(b, eval(c['port']))
+                s.set_light_color(Type.COLORNONE)
     rospy.on_shutdown(cleanup_node)
 
     config = rospy.get_param("~"+ns)
