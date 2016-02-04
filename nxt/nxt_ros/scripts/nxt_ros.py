@@ -45,7 +45,7 @@ import nxt.motor
 import thread
 from sensor_msgs.msg import JointState, Imu
 from std_msgs.msg import Bool
-from nxt_msgs.msg import Range, Contact, JointCommand, Color, Gyro, Accelerometer
+from nxt_msgs.msg import Range, Contact, JointCommand, Color, Light, Gyro, Accelerometer
 from PyKDL import Rotation
 
 POWER_TO_NM = 0.01
@@ -404,6 +404,37 @@ class IntensitySensor(Device):
         self.pub.publish(co)
 
 
+class LightSensor(Device):
+    """
+    This uses the NXT light sensor to
+    measure the intensity of ambient light,
+    with the option to enable the LED to
+    measure reflected light.
+    """
+    def __init__(self, params, comm):
+        Device.__init__(self, params)
+        # Create light sensor
+        self.light = nxt.sensor.Light(comm, eval(params['port']))
+        self.frame_id = params['frame_id']
+        self.illuminated = params['illuminated']
+
+        # Enable the sensor
+        if self.illuminated:
+            self.light.set_illuminated(active=True)
+        else:
+            self.light.set_illuminated(active=False)
+
+        # Create publisher
+        self.pub = rospy.Publisher(params['name'], Light)
+        
+    def trigger(self):
+        co = Light()
+        co.header.frame_id = self.frame_id
+        co.header.stamp = rospy.Time.now()
+        co.intensity = self.light.get_lightness()
+        self.pub.publish(co)
+
+
 def main():
     rospy.init_node('nxt_ros')
     ns = 'nxt_robot'
@@ -424,6 +455,10 @@ def main():
                 # If there's an intensity sensor, turn off the LED light
                 s = nxt.sensor.Color20(b, eval(c['port']))
                 s.set_light_color(Type.COLORNONE)
+            elif c['type'] == 'light':
+                # If there's a light sensor, turn off the LED light
+                ls = nxt.sensor.Light(b, eval(c['port']))
+                ls.set_illuminated(active=False)
     rospy.on_shutdown(cleanup_node)
 
     config = rospy.get_param("~"+ns)
@@ -440,6 +475,8 @@ def main():
             components.append(ColorSensor(c, b))
         elif c['type'] == 'intensity':
             components.append(IntensitySensor(c, b))
+        elif c['type'] == 'light':
+            components.append(LightSensor(c, b))
         elif c['type'] == 'gyro':
             components.append(GyroSensor(c, b))
         elif c['type'] == 'accelerometer':
