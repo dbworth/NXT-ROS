@@ -312,8 +312,11 @@ class ColorSensor(Device):
     def __init__(self, params, comm):
         Device.__init__(self, params)
         # create color sensor
-        self.color = nxt.sensor.ColorSensor(comm, eval(params['port']))
+        self.color = nxt.sensor.Color20(comm, eval(params['port']))
         self.frame_id = params['frame_id']
+
+        # Turn on the LED light
+        self.color.set_light_color(Type.COLORFULL) # white
 
         # create publisher
         self.pub = rospy.Publisher(params['name'], Color)
@@ -388,12 +391,23 @@ class IntensitySensor(Device):
         self.pub.publish(co)
 
 
-
 def main():
     rospy.init_node('nxt_ros')
     ns = 'nxt_robot'
     host = rospy.get_param("~host", None)
     b = nxt.locator.find_one_brick(host)
+
+    config = []
+
+    # Define exit handler
+    def cleanup_node():
+        print "Shutting down node"
+        for c in config:
+            if c['type'] == 'color':
+                # If there's a color sensor, turn off the LED light
+                cs = nxt.sensor.Color20(b, eval(c['port']))
+                cs.set_light_color(Type.COLORNONE)
+    rospy.on_shutdown(cleanup_node)
 
     config = rospy.get_param("~"+ns)
     components = []
