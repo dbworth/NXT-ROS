@@ -204,25 +204,33 @@ class TouchSensor(Device):
         self.pub.publish(ct)
 
 
-
 class UltraSonicSensor(Device):
     def __init__(self, params, comm):
         Device.__init__(self, params)
-        # create ultrasonic sensor
-        self.ultrasonic = nxt.sensor.UltrasonicSensor(comm, eval(params['port']))
+        # Create ultrasonic sensor
+        self.ultrasonic = nxt.sensor.Ultrasonic(comm, eval(params['port']))
         self.frame_id = params['frame_id']
         self.spread = params['spread_angle']
         self.min_range = params['min_range']
         self.max_range = params['max_range']
 
-        # create publisher
+        # Enable the sensor
+        mode = nxt.sensor.Ultrasonic.Commands.CONTINUOUS_MEASUREMENT
+        self.ultrasonic.command(mode)
+
+        # Create publisher
         self.pub = rospy.Publisher(params['name'], Range)
         
     def trigger(self):
         ds = Range()
         ds.header.frame_id = self.frame_id
         ds.header.stamp = rospy.Time.now()
+
+        # Read the distance and convert to meters
         ds.range = self.ultrasonic.get_sample()/100.0
+
+        # Publish the spread angle and min/max
+        # range values as defined by the user
         ds.spread_angle = self.spread
         ds.range_min = self.min_range
         ds.range_max = self.max_range
@@ -459,6 +467,11 @@ def main():
                 # If there's a light sensor, turn off the LED light
                 ls = nxt.sensor.Light(b, eval(c['port']))
                 ls.set_illuminated(active=False)
+            elif c['type'] == 'ultrasonic':
+                # If there's an ultrasonic sensor, turn it off
+                us = nxt.sensor.Ultrasonic(b, eval(c['port']))
+                mode = nxt.sensor.Ultrasonic.Commands.CONTINUOUS_MEASUREMENT
+                us.command(mode)
     rospy.on_shutdown(cleanup_node)
 
     config = rospy.get_param("~"+ns)
