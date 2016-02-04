@@ -111,11 +111,11 @@ class Motor(Device):
         # create motor
         self.name = params['name']
         self.motor = nxt.motor.Motor(comm, eval(params['port']))
-        self.cmd = 0 #default command
+        self.cmd = 0 # the commanded power value
 
         # Use absolute position
         # True  = Return the position as an absolute value between
-        #         0 to 360 degrees (converted to radians).
+        #         0 to 2*pi radians (one full rotation).
         # False = The position ranges from -32,768 to +32,767
         #         degrees, relative to the starting position.
         #         After this the 16-bit signed integer will overflow.
@@ -124,9 +124,10 @@ class Motor(Device):
         # this can be tuned for better acuracy
         self.counts_per_rev = 358
 
-        # Reset the motor encoder to zero, so the
-        # rotation count will be relative to zero
-        self.motor.reset_position(False)
+        if self.use_absolute_position:
+            # Upon initialization, reset the motor encoder to zero.
+            # Note: Setting this to True seems to do nothing.
+            self.motor.reset_position(False)
 
         # create publisher
         self.pub = rospy.Publisher('joint_state', JointState)
@@ -138,21 +139,22 @@ class Motor(Device):
 
     def cmd_cb(self, msg):
         if msg.name == self.name:
- 
+            # Store the commanded power value,
+            # limited to the range +/-125
             cmd = msg.effort / POWER_TO_NM
             if cmd > POWER_MAX:
                 cmd = POWER_MAX
             elif cmd < -POWER_MAX:
                 cmd = -POWER_MAX
-            self.cmd = cmd  #save command
+            self.cmd = cmd
 
     def trigger(self):
         js = JointState()
         js.header.stamp = rospy.Time.now()
-        state = self.motor.get_output_state()
         js.name.append(self.name)
 
-        rotation_count = state[9]
+        # Get the rotational position of the motor
+        rotation_count = self.motor.get_tacho().rotation_count
         position_in_radians = rotation_count * math.pi / 180.0
 
         if self.use_absolute_position:
@@ -162,8 +164,7 @@ class Motor(Device):
                 position_in_radians = 2.0*math.pi + position_in_radians
 
         js.position.append(position_in_radians)
-        js.position.append(rotation_count * math.pi / 180.0)
-        js.effort.append(state[1] * POWER_TO_NM)
+        js.effort.append(self.cmd * POWER_TO_NM) # this is just the commanded effort
         vel = 0
         if self.last_js:
             vel = (js.position[0]-self.last_js.position[0])/(js.header.stamp-self.last_js.header.stamp).to_sec()
@@ -183,8 +184,6 @@ class Motor(Device):
 
         # send command
         self.motor.run(int(self.cmd), 0)
-
-
 
 
 class TouchSensor(Device):
@@ -394,8 +393,7 @@ def main():
     rospy.init_node('nxt_ros')
     ns = 'nxt_robot'
     host = rospy.get_param("~host", None)
-    sock = nxt.locator.find_one_brick(host)
-    b = sock.connect()
+    b = nxt.locator.find_one_brick(host)
 
     config = rospy.get_param("~"+ns)
     components = []
@@ -434,6 +432,6 @@ def main():
             rospy.sleep(0.01)
 
 
-
 if __name__ == '__main__':
     main()
+
