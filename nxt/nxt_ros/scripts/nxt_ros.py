@@ -309,6 +309,10 @@ class AccelerometerSensor(Device):
         self.pub.publish(gs)
 
 class ColorSensor(Device):
+    """
+    This uses the NXT 2.0 RGB color sensor
+    to detect 1 of 6 preset color values.
+    """
     def __init__(self, params, comm):
         Device.__init__(self, params)
         # create color sensor
@@ -325,7 +329,7 @@ class ColorSensor(Device):
         co = Color()
         co.header.frame_id = self.frame_id
         co.header.stamp = rospy.Time.now()
-        co.intensity = 0.0
+        # Get the color value (an integer from 1 to 6)
         color = self.color.get_color()
         if color == 1:  # black
             co.r = 0.0
@@ -353,6 +357,7 @@ class ColorSensor(Device):
             co.b = 1.0
         else:
             rospy.logerr('Undefined color of color sensor')
+        co.intensity = color
         self.pub.publish(co)
 
 
