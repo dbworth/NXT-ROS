@@ -14,10 +14,8 @@
   <depend package="tf"/>
 
   <export>
-    <rviz plugin="${prefix}/lib/nxt_rviz_plugin.yaml"/>
+    <!-- rviz plugin="${prefix}/lib/nxt_rviz_plugin.yaml"/ -->
   </export>
 
-
 </package>
-
 
