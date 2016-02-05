@@ -3,16 +3,27 @@ NXT-ROS
 
 A software stack containing tools for using LEGO Mindstorms NXT with ROS. 
 
-This branch depends on:<br> 	&#8226; ROS Fuerte<br> &#8226; Python 2.6+<br> &#8226; NXT-Python v2.2.2
+This branch depends on:<br> 	&#8226; ROS Fuerte<br> &#8226; Python 2.6+<br> &#8226; NXT-Python v2.2.2  
 
 Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
-Original documentation: [wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
 
+.
+
+###Documentation  
+Installation instructions are in this README file.  
+
+The original documentation has more detailed information:  
+[wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
+[wiki.ros.org/nxt_robots](http://wiki.ros.org/nxt_robots)  
+[wiki.ros.org/nxt_apps](http://wiki.ros.org/nxt_apps)  
 .
 
 ###Package status
 
-All packages use `rosbuild`.
+These packages use `rosbuild` and were tested  
+with ROS Fuerte on Ubuntu 11.10 and 12.04.
+
+The following features have been tested:
 
 **nxt** stack:  
 
@@ -59,15 +70,6 @@ Working.
 
 .
 
-###Documentation  
-Installation instructions are in this README file.  
-
-The original documentation has more detailed information:  
-[wiki.ros.org/nxt](http://wiki.ros.org/nxt)  
-[wiki.ros.org/nxt_robots](http://wiki.ros.org/nxt_robots)  
-[wiki.ros.org/nxt_apps](http://wiki.ros.org/nxt_apps)  
-
-.
 
 ###Installation
 
