@@ -1,0 +1,11 @@
+--- nxt_server
++++ nxt_server-new
+@@ -13,6 +13,7 @@
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ 
++import roslib; roslib.load_manifest("nxt_python")
+ import nxt
+ import socket, sys, traceback
+ from nxt.utils import parse_command_line_arguments
+

@@ -1,0 +1,11 @@
+--- nxt_push
++++ nxt_push-new
+@@ -14,6 +14,7 @@
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ 
++import roslib; roslib.load_manifest("nxt_python")
+ import sys
+ import nxt.locator
+ from nxt.brick import FileWriter
+

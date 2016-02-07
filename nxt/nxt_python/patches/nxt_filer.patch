@@ -1,0 +1,11 @@
+--- nxt_filer
++++ nxt_filer-new
+@@ -20,6 +20,7 @@
+ import urllib2
+ import sys
+ 
++import roslib; roslib.load_manifest("nxt_python")
+ import nxt.locator
+ from nxt.brick import FileFinder, FileReader, FileWriter
+ from nxt.utils import parse_command_line_arguments
+

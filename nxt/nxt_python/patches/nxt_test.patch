@@ -1,0 +1,10 @@
+--- nxt_test
++++ nxt_test-new
+@@ -9,6 +9,7 @@
+ Usage:  nxt_test (takes no arguments except --help)'''
+     exit(0)
+ 
++import roslib; roslib.load_manifest("nxt_python")
+ import nxt.locator
+ import nxt.brick
+
