@@ -46,6 +46,9 @@ Working.
 Working.  
 There is a new option to read the position of a motor as the absolute angle from 0 to 2*pi radians. By default the motor position is measured as the total +/- rotation in either direction, relative to the starting position.
 
+ - **nxt_ros_test**  
+Working.  
+
  - **nxt_rviz_plugin**  
 Disabled, it is not compatible with the ROS Fuerte release of RViz which was ported to Qt.
 
