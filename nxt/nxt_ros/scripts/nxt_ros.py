@@ -238,13 +238,18 @@ class UltraSonicSensor(Device):
  
 
 class GyroSensor(Device):
+    """
+    This uses the HiTechnic gyro sensor to
+    measure angular velocity around the x,y,z axes
+    and calculate an estimate of the orientation.
+    """
     def __init__(self, params, comm):
         Device.__init__(self, params)
         #create gyro sensor
-        self.gyro = nxt.sensor.GyroSensor(comm, eval(params['port']))
+        self.gyro = nxt.sensor.HTGyro(comm, eval(params['port']))
         self.frame_id = params['frame_id']
         self.orientation = 0.0
-        self.offset = 0.0
+        self.offset = params['offset']
         self.prev_time = rospy.Time.now()
 
         # calibrate
@@ -299,7 +304,7 @@ class GyroSensor(Device):
 class AccelerometerSensor(Device):
     """
     This uses the HiTechnic accelerometer sensor
-    to measure acceleration on the x,y,z axis.
+    to measure acceleration on the x,y,z axes.
     """
     def __init__(self, params, comm):
         Device.__init__(self, params)
