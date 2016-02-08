@@ -184,6 +184,7 @@ To stop the motor, set the effort to 0.0:
 **nxt_robots** stack:  
 
 Connect motors to Port A and Port B of the NXT Brick.  
+Connect an ultrasonic sensor to Port 2.  
 Connect the NXT to your computer.  
 
 > $ roscore
@@ -191,12 +192,11 @@ Connect the NXT to your computer.
 In a new terminal:  
 > $ roslaunch nxt_robot_gyro_car robot.launch  
 
-Ignore the error messages, this is because we haven't connected the required motors and sensors.  
-
 In a new terminal:  
 > $ rosrun rviz rviz  
 
-In Rviz you'll need to set the Fixed Frame to '/base_link' and add a RobotModel display so you can visualize the robot.
+In Rviz you'll need to set the Fixed Frame to '/base_link'.  
+Add a RobotModel display so you can visualize the robot.
 
 **nxt_apps** stack:  
 
