@@ -46,6 +46,9 @@ Working.
 Working.  
 There is a new option to read the position of a motor as the absolute angle from 0 to 2*pi radians. By default the motor position is measured as the total +/- rotation in either direction, relative to the starting position.
 
+ - **nxt_ros_test**  
+Working.  
+
  - **nxt_rviz_plugin**  
 Disabled, it is not compatible with the ROS Fuerte release of RViz which was ported to Qt.
 
@@ -94,7 +97,7 @@ You might like to add these commands to your `~/.bashrc` file.
 
 **Install dependencies:**  
 
-NXT-Python v1.2.0 is automatically installed in the `/src` directory of the `nxt_python` package when we run `rosmake`.
+NXT-Python v2.2.2 is automatically installed in the `/src` directory of the `nxt_python` package when we run `rosmake`.
 
 You can install the other dependencies using the Ubuntu Package Manager or ROSdep: 
 > $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation  
@@ -132,6 +135,21 @@ Log-out or restart your computer.
 
 
 ###Test the installation:  
+
+Connect your NXT Brick to the computer via USB cable.  
+You can run this utility to display information about your Brick:  
+> $ rosrun nxt_python nxt_test
+
+You should see the following output:  
+```
+NXT brick name: MyBrick
+Host address: 00:16:00:00:D3:00
+Bluetooth signal strength: 0
+Free user flash: 25872
+Protocol version 1.124
+Firmware version 1.31
+Battery level 7602 mV
+```
 
 **nxt** stack:  
 
@@ -194,6 +212,23 @@ http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick
 > $ roslaunch nxt_teleop teleop_joy.launch 
 
 With the Microsoft XBox 360 joystick, you need to hold down the top-left button. The left joystick controls turning, the right joystick goes forward.  
+
+**MotorControl** firmware:  
+
+[MotorControl](http://www.mindstorms.rwth-aachen.de/trac/wiki/MotorControl) is a program that can be optionally installed on your NXT Brick to provide more accurate control of the motors using python. Instead of sending commands directly to the motor, you send commands to the onboard controller which tracks the status of the motors.
+
+Copy the MotorControl program to your NXT Brick.  
+You must first change to the directory containing the *.rxe file:  
+> $ roscd nxt_python/src/MotorControl/  
+
+Connect to your Brick via USB cable and transfer the program binary:
+
+> $ rosrun nxt_python nxt_push MotorControl22.rxe
+
+Test the controller using the provided test script:
+> $ roscore  
+> $ rosrun nxt_python motor_cont_test.py  
+
 
 =============
 
