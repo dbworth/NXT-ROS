@@ -41,3 +41,8 @@ nxt_robot:
 #    port: PORT_1
 #    desired_frequency: 10.0
 
+#  - type: accelerometer
+#    frame_id: accel_sensor_frame
+#    name: my_accel_sensor
+#    port: PORT_1
+#    desired_frequency: 10.0

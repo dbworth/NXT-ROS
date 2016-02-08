@@ -295,11 +295,16 @@ class GyroSensor(Device):
         (imu.orientation.x, imu.orientation.y, imu.orientation.z, imu.orientation.w) = Rotation.RotZ(self.orientation).GetQuaternion()
         self.pub2.publish(imu)
 
+
 class AccelerometerSensor(Device):
+    """
+    This uses the HiTechnic accelerometer sensor
+    to measure acceleration on the x,y,z axis.
+    """
     def __init__(self, params, comm):
         Device.__init__(self, params)
-        #create gyro sensor
-        self.accel = nxt.sensor.AccelerometerSensor(comm, eval(params['port']))
+        # create accelerometer sensor
+        self.accel = nxt.sensor.HTAccelerometer(comm, eval(params['port']))
         self.frame_id = params['frame_id']
 
         # create publisher
@@ -309,12 +314,14 @@ class AccelerometerSensor(Device):
         gs = Accelerometer()
         gs.header.frame_id = self.frame_id
         gs.header.stamp = rospy.Time.now()
-        x,y,z = self.accel.get_sample()
+        x,y,z = self.accel.get_acceleration()
+
         gs.linear_acceleration.x = x*9.8
         gs.linear_acceleration.y = y*9.8
         gs.linear_acceleration.z = z*9.8
         gs.linear_acceleration_covariance = [1, 0, 0, 0, 1, 0, 0, 0, 1]
         self.pub.publish(gs)
+
 
 class ColorSensor(Device):
     """
