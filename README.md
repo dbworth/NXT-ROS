@@ -4,7 +4,8 @@ NXT-ROS
 A software stack containing tools to interface LEGO Mindstorms with ROS.
 
 **Maintainer:**  
-David Butterworth
+David Butterworth  
+Last updated Jan 2016  
 
 **Original authors:**  
 Tully Foote, Wim Meeussen, and Melonee Wise  
