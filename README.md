@@ -3,9 +3,9 @@ NXT-ROS
 
 A software stack containing tools for using LEGO Mindstorms NXT with ROS. 
 
-This branch depends on:<br> 	&#8226; ROS Fuerte<br> &#8226; Python 2.x<br> &#8226; NXT-Python v2.2.2  
+This branch depends on:<br> 	&#8226; ROS Groovy<br> &#8226; Python 2.x<br> &#8226; NXT-Python v2.2.2  
 
-Forked from the version for ROS Electric: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
+Originally forked from: http://stack-nxt.foote-ros-pkg.googlecode.com/hg  
 
 .
 
@@ -21,7 +21,7 @@ The original documentation has more detailed information:
 ###Package status
 
 These packages use `rosbuild` and were tested  
-with ROS Fuerte on Ubuntu 11.10 and 12.04.
+with ROS Groovy on Ubuntu 12.04.
 
 The following features have been tested:
 
@@ -50,7 +50,7 @@ There is a new option to read the position of a motor as the absolute angle from
 Working.  
 
  - **nxt_rviz_plugin**  
-Disabled, it is not compatible with the ROS Fuerte release of RViz which was ported to Qt.
+Disabled.  
 
 **nxt_robots** stack:  
 
@@ -66,7 +66,7 @@ Working. The robot model can be viewed in Rviz.
 **nxt_apps** stack:  
 
  - **nxt_assisted_teleop**  
-Compiles ok, un-tested.
+Working.  
 
  - **nxt_teleop**  
 Working.  
@@ -79,9 +79,9 @@ Working.
 Upgrade the firmware on your NXT brick.  
 The minimum required version is 1.28, but 1.31 is the latest as of Jan 2016.
 
-Clone the Fuerte branch of this repository:  
+Clone the Groovy branch of this repository:  
 > $ cd ~/  
-> $ git clone https://github.com/dbworth/NXT-ROS.git --branch fuerte
+> $ git clone https://github.com/dbworth/NXT-ROS.git --branch groovy
 
 Copy the 3 stacks into your ROS Workspace.  
 Note: you only need the `nxt` stack to get started.
@@ -100,7 +100,7 @@ You might like to add these commands to your `~/.bashrc` file.
 NXT-Python v2.2.2 is automatically installed in the `/src` directory of the `nxt_python` package when we run `rosmake`.
 
 You can install the other dependencies using the Ubuntu Package Manager or ROSdep: 
-> $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation ros-fuerte-orocos-kinematics-dynamics  
+> $ sudo apt-get install ros-groovy-ros-comm ros-groovy-common-msgs ros-groovy-joystick-drivers ros-groovy-visualization ros-groovy-navigation ros-groovy-orocos-kinematics-dynamics  
 > $ sudo aptitude install libusb-dev python-usb python-bluez  
 
 or 
