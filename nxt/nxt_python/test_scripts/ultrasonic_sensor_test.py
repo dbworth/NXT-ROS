@@ -19,22 +19,20 @@ def test_sensors(b):
     us.command(us.Commands.CONTINUOUS_MEASUREMENT)
     start = rospy.Time.now()
     while rospy.Time.now() < start+rospy.Duration(5.0):
-    print 'CONTINUOUS MEASUREMENT DISTANCE:', us.get_distance()
-    time.sleep(0.1)
+        print "CONTINUOUS MEASUREMENT DISTANCE:", us.get_distance()
+        time.sleep(0.1)
         
     us.command(us.Commands.OFF) # Turn off the sensor
-    print '\n'
+    print "\n"
 
     start = rospy.Time.now()
     while rospy.Time.now() < start+rospy.Duration(6.0):
         print "SENSOR WILL MEASURE SINGLE-SHOT DISTANCE IN 2 sec..."
         time.sleep(2.0)
-
-    us.command(us.Commands.SINGLE_SHOT)
-
-    print 'DISTANCE:', us.get_distance()
-    time.sleep(0.5)
-    print '\n'
+        us.command(us.Commands.SINGLE_SHOT)
+        print "DISTANCE:", us.get_distance()
+        time.sleep(0.5)
+        print "\n"
 
     us.command(us.Commands.OFF) # Turn off the sensor
 
