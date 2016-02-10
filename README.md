@@ -15,13 +15,13 @@ Willow Garage, 2010
 There are multiple versions of NXT-ROS:
 
 - **ROS Indigo**  
-coming soon
-
-- **ROS Groovy**  
  **catkin**  
  coming soon  
+
+- **ROS Groovy**  
  **rosbuild**  
- coming soon  
+ **Dependencies:** Python 2.x, NXT-Python 2.2.2  
+ **Source:** https://github.com/dbworth/NXT-ROS/tree/groovy/  
 
 - **ROS Fuerte**  
  **rosbuild**   
