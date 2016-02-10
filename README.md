@@ -100,7 +100,7 @@ You might like to add these commands to your `~/.bashrc` file.
 NXT-Python v2.2.2 is automatically installed in the `/src` directory of the `nxt_python` package when we run `rosmake`.
 
 You can install the other dependencies using the Ubuntu Package Manager or ROSdep: 
-> $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation  
+> $ sudo apt-get install ros-fuerte-ros-comm ros-fuerte-common-msgs ros-fuerte-joystick-drivers ros-fuerte-visualization ros-fuerte-navigation ros-fuerte-orocos-kinematics-dynamics  
 > $ sudo aptitude install libusb-dev python-usb python-bluez  
 
 or 
