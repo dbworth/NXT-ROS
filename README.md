@@ -50,7 +50,7 @@ There is a new option to read the position of a motor as the absolute angle from
 Working.  
 
  - **nxt_rviz_plugin**  
-Disabled.  
+Working.  
 
 **nxt_robots** stack:  
 
