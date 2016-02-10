@@ -1,0 +1,26 @@
+<package>
+  <description brief="nxt_rviz_plugin">
+Plugins for visualizing data coming from the Lego NXT Brick in Rviz.
+Suitable for ROS Groovy and newer.
+  </description>
+  <author>David Butterworth</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org</url>
+
+  <depend package="roscpp"/>
+  <depend package="rviz"/>
+  <depend package="tf"/>
+  <depend package="geometry_msgs"/>
+  <depend package="nxt_msgs"/>
+
+  <export>
+      <rosdoc config="${prefix}/rosdoc.yaml"/>
+      <rviz plugin="${prefix}/plugin_description.xml"/>
+  </export>
+
+</package>
+
+
+
+

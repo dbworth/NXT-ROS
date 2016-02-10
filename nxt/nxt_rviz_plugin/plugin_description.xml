@@ -1,0 +1,20 @@
+<library path="lib/libnxt_rviz_plugin">
+
+  <class name="nxt_rviz_plugin/NXTColor"
+         type="nxt_rviz_plugin::NXTColorDisplay"
+         base_class_type="rviz::Display">
+    <description>
+      Displays data from a nxt_msgs::Color message as a cylinder of color.
+    </description>
+  </class>
+
+  <class name="nxt_rviz_plugin/NXTUltrasonic"
+         type="nxt_rviz_plugin::NXTUltrasonicDisplay"
+         base_class_type="rviz::Display">
+    <description>
+      Displays data from a nxt_msgs::Range message as a cone.
+    </description>
+  </class>
+
+</library>
+
