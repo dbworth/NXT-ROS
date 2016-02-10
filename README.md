@@ -39,4 +39,14 @@ There are multiple versions of NXT-ROS:
  **Source:** http://stack-nxt-robots.foote-ros-pkg.googlecode.com/hg/ (Mercurial)  
  **Source:** http://stack-nxt-apps.foote-ros-pkg.googlecode.com/hg/ (Mercurial)  
 
+.
 
+**Screenshots:**  
+
+`nxt_rviz_plugin` in ROS Groovy, displaying data from the ultrasonic and color sensors:  
+![nxt_rviz_plugin screenshot1](https://raw.githubusercontent.com/dbworth/NXT-ROS/master/screenshots/nxt_rviz_plugin_01.png)
+
+`nxt_rviz_plugin` in ROS Groovy, showing an obstacle costmap generated from the ultrasonic sensor data:  
+![nxt_rviz_plugin screenshot2](https://raw.githubusercontent.com/dbworth/NXT-ROS/master/screenshots/nxt_rviz_plugin_02.png)
+
+=================
