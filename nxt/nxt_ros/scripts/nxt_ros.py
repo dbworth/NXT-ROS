@@ -370,7 +370,7 @@ class ColorSensor(Device):
         elif color == 5: # red
             co.r = 1.0
             co.g = 0.0
-            co.b = 1.0
+            co.b = 0.0
         elif color == 6: # white
             co.r = 1.0
             co.g = 1.0
