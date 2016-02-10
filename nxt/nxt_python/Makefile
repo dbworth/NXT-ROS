@@ -14,10 +14,12 @@ nxt-python: $(INSTALL_DIR)/installed
 $(INSTALL_DIR)/installed: $(SOURCE_DIR)/unpacked
 	rm -rf src/nxt
 	cd $(SOURCE_DIR) && python setup.py install --prefix=$(INSTALL_DIR) --install-purelib=$(INSTALL_DIR)/src
-	patch -p0 bin/nxt_filer  patches/nxt_filer.patch
-	patch -p0 bin/nxt_push   patches/nxt_push.patch
-	patch -p0 bin/nxt_server patches/nxt_server.patch
-	patch -p0 bin/nxt_test   patches/nxt_test.patch
+	patch -p0  src/nxt/brick.py           patches/brick.patch
+	patch -p0  src/nxt/sensor/digital.py  patches/digital.patch
+	patch -p0  bin/nxt_filer              patches/nxt_filer.patch
+	patch -p0  bin/nxt_push               patches/nxt_push.patch
+	patch -p0  bin/nxt_server             patches/nxt_server.patch
+	patch -p0  bin/nxt_test               patches/nxt_test.patch
 	touch $(INSTALL_DIR)/installed
 
 clean:
